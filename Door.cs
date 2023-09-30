@@ -4,6 +4,7 @@ using System;
 public partial class Door : Node2D
 {
 
+	[Export]
 	private bool Open;
 
 	private TileMap OpenTileMap;
@@ -19,9 +20,11 @@ public partial class Door : Node2D
 	public override void _Ready()
 	{
 		Open = false;
+
 		OpenTileMap = GetNode<TileMap>("OpenedTileMap");
 		ClosedTileMap = GetNode<TileMap>("ClosedTileMap");
 		DoorBody = GetNode<StaticBody2D>("StaticBody2D");
+
 		DefaultCollisionLayer = 1;
 		DefaultCollisionMask = 1;
 	}

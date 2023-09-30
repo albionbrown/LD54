@@ -10,6 +10,7 @@ script = ExtResource("1_8h056")
 
 [node name="Room1" parent="." groups=["Rooms"] instance=ExtResource("1_4vhe8")]
 position = Vector2(64, 0)
+Name = "The First Room"
 
 [node name="Room2" parent="." groups=["Rooms"] instance=ExtResource("1_4vhe8")]
 position = Vector2(448, 0)
@@ -29,6 +30,12 @@ position = Vector2(-64, 64)
 position = Vector2(448, 64)
 rotation = 1.5708
 
-[node name="Character" parent="." instance=ExtResource("2_8dtn7")]
-position = Vector2(24, 96)
+[node name="Character" parent="." groups=["Player"] instance=ExtResource("2_8dtn7")]
+position = Vector2(88, 96)
 rotation = 0.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Character"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(88, 96)

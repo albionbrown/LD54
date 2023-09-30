@@ -36,7 +36,7 @@ public partial class Room : TileMap
 	public void PlayerEnters() {
 
 		// @todo display name
-
+		
 	}
 
 	public void OpenDoor(int doorNumber) {
@@ -60,5 +60,9 @@ public partial class Room : TileMap
 
 	public void CompleteRoom() {
 		Completed = true;
+	}
+
+	public void _on_room_area_body_entered(Node2D body) {
+		PlayerEnters();
 	}
 }

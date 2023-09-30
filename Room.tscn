@@ -29,7 +29,7 @@ tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_jwls7")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oed7m"]
-size = Vector2(256, 192)
+size = Vector2(240, 176)
 
 [node name="HorizontalRoom" type="TileMap"]
 tile_set = SubResource("TileSet_xgcbw")
@@ -52,16 +52,17 @@ position = Vector2(-1, 0)
 position = Vector2(2, 0)
 polygon = PackedVector2Array(7, 128, 7, 184, 247, 184, 247, 128, 255, 128, 255, 192, -1, 192, -1, 128)
 
-[node name="RoomArea" type="Area2D" parent="."]
-
-[node name="RoomAreaCollision" type="CollisionShape2D" parent="RoomArea"]
-visible = false
-position = Vector2(128, 96)
-shape = SubResource("RectangleShape2D_oed7m")
-
 [node name="Door1" parent="." groups=["Doors"] instance=ExtResource("3_684tp")]
 position = Vector2(0, 64)
 
 [node name="Door2" parent="." groups=["Doors"] instance=ExtResource("3_684tp")]
 position = Vector2(256, 128)
 rotation = 3.14159
+
+[node name="RoomArea" type="Area2D" parent="."]
+
+[node name="RoomAreaCollision" type="CollisionShape2D" parent="RoomArea"]
+position = Vector2(128, 96)
+shape = SubResource("RectangleShape2D_oed7m")
+
+[connection signal="body_entered" from="RoomArea" to="." method="_on_room_area_body_entered"]
