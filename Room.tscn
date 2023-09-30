@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://cq7olfoq7q73f"]
+
+[ext_resource type="Script" path="res://Room.cs" id="1_a0gga"]
+[ext_resource type="Texture2D" uid="uid://cswy4isadiy1c" path="res://assets/img/TileSet.png" id="1_o8yhg"]
+[ext_resource type="PackedScene" uid="uid://dqxatv04x4o63" path="res://Door.tscn" id="3_684tp"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jwls7"]
+resource_name = "Background"
+texture = ExtResource("1_o8yhg")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+2:1/0 = 0
+3:0/0 = 0
+3:1/0 = 0
+4:0/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+7:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_xgcbw"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_jwls7")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oed7m"]
+size = Vector2(256, 192)
+
+[node name="HorizontalRoom" type="TileMap"]
+tile_set = SubResource("TileSet_xgcbw")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 0, 0, 3, 65536, 0, 131075, 65536, 1, 131072, 0, 1, 131073, 196608, 1, 131074, 196608, 1, 1, 131072, 0, 2, 131072, 0, 65537, 262144, 0, 65538, 262144, 0)
+script = ExtResource("1_a0gga")
+
+[node name="RigidBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-1, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+position = Vector2(2, 0)
+build_mode = 1
+polygon = PackedVector2Array(-1, 64, -1, 0, 255, 0, 255, 64, 255, 64, 247, 64, 247, 8, 7, 8, 7, 64)
+
+[node name="RigidBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-1, 0)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="RigidBody2D2"]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(7, 128, 7, 184, 247, 184, 247, 128, 255, 128, 255, 192, -1, 192, -1, 128)
+
+[node name="RoomArea" type="Area2D" parent="."]
+
+[node name="RoomAreaCollision" type="CollisionShape2D" parent="RoomArea"]
+visible = false
+position = Vector2(128, 96)
+shape = SubResource("RectangleShape2D_oed7m")
+
+[node name="Door1" parent="." groups=["Doors"] instance=ExtResource("3_684tp")]
+position = Vector2(0, 64)
+
+[node name="Door2" parent="." groups=["Doors"] instance=ExtResource("3_684tp")]
+position = Vector2(256, 128)
+rotation = 3.14159

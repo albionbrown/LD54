@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://dqxatv04x4o63"]
+
+[ext_resource type="Script" path="res://Door.cs" id="1_nb3y8"]
+[ext_resource type="Texture2D" uid="uid://cswy4isadiy1c" path="res://assets/img/TileSet.png" id="1_njwmt"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_esnom"]
+texture = ExtResource("1_njwmt")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_yhgn5"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_esnom")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qcf2o"]
+texture = ExtResource("1_njwmt")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_8pmnv"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_qcf2o")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wm4bx"]
+size = Vector2(8, 64)
+
+[node name="Door" type="Node2D"]
+script = ExtResource("1_nb3y8")
+
+[node name="OpenedTileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_yhgn5")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 458752, 1)
+
+[node name="ClosedTileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_8pmnv")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 393216, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+disable_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(4, 32)
+shape = SubResource("RectangleShape2D_wm4bx")
