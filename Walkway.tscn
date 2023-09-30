@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3 uid="uid://4w83sbrb04u"]
+
+[ext_resource type="Texture2D" uid="uid://cswy4isadiy1c" path="res://assets/img/TileSet.png" id="1_lbodc"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8sxgt"]
+texture = ExtResource("1_lbodc")
+32:0/0 = 0
+32:1/0 = 0
+32:2/0 = 0
+32:3/0 = 0
+33:0/0 = 0
+33:1/0 = 0
+33:2/0 = 0
+33:3/0 = 0
+34:0/0 = 0
+34:1/0 = 0
+34:2/0 = 0
+34:3/0 = 0
+35:0/0 = 0
+35:1/0 = 0
+35:2/0 = 0
+35:3/0 = 0
+32:4/0 = 0
+32:5/0 = 0
+32:6/0 = 0
+32:7/0 = 0
+33:4/0 = 0
+33:5/0 = 0
+33:6/0 = 0
+33:7/0 = 0
+34:4/0 = 0
+34:5/0 = 0
+34:6/0 = 0
+34:7/0 = 0
+35:4/0 = 0
+35:5/0 = 0
+35:6/0 = 0
+35:7/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_dgj60"]
+sources/0 = SubResource("TileSetAtlasSource_8sxgt")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4ouk"]
+size = Vector2(8, 64)
+
+[node name="Walkway" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_dgj60")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 2097152, 0, 65536, 2097152, 1, 131072, 2097152, 2, 196608, 2097152, 3, 1, 2162688, 0, 65537, 2162688, 1, 131073, 2162688, 2, 196609, 2162688, 3, 2, 2228224, 0, 65538, 2228224, 1, 131074, 2228224, 2, 196610, 2228224, 3, 3, 2293760, 0, 65539, 2293760, 1, 131075, 2293760, 2, 196611, 2293760, 3)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(4, 32)
+shape = SubResource("RectangleShape2D_r4ouk")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(56, 0)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(4, 32)
+shape = SubResource("RectangleShape2D_r4ouk")

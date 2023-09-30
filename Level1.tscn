@@ -1,51 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcsdhwf32fjfj"]
+[gd_scene load_steps=4 format=3 uid="uid://bcsdhwf32fjfj"]
 
-[ext_resource type="Texture2D" uid="uid://cswy4isadiy1c" path="res://assets/img/TileSet.png" id="1_nwjp8"]
+[ext_resource type="PackedScene" uid="uid://cq7olfoq7q73f" path="res://Room.tscn" id="1_4vhe8"]
 [ext_resource type="PackedScene" uid="uid://djahqfp1a8mq1" path="res://Character.tscn" id="2_8dtn7"]
+[ext_resource type="PackedScene" uid="uid://4w83sbrb04u" path="res://Walkway.tscn" id="2_rib5f"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jwls7"]
-resource_name = "Background"
-texture = ExtResource("1_nwjp8")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-2:1/0 = 0
-3:0/0 = 0
-3:1/0 = 0
-4:0/0 = 0
-5:1/0 = 0
-6:1/0 = 0
-5:0/0 = 0
-6:0/0 = 0
-7:0/0 = 0
-7:1/0 = 0
+[node name="Node" type="Node"]
 
-[sub_resource type="TileSet" id="TileSet_xgcbw"]
-tile_size = Vector2i(64, 64)
-sources/0 = SubResource("TileSetAtlasSource_jwls7")
+[node name="Room1" parent="." instance=ExtResource("1_4vhe8")]
 
-[node name="Node" type="TileMap"]
-position = Vector2(1, 0)
-tile_set = SubResource("TileSet_xgcbw")
-format = 2
-layer_0/tile_data = PackedInt32Array(0, 0, 0, 3, 65536, 0, 131075, 65536, 1, 131072, 0, 1, 131073, 196608, 1, 131074, 196608, 1, 1, 131072, 0, 2, 131072, 0, 65538, 262144, 0, 65537, 262144, 0, 65536, 393216, 0, 65539, 327680, 1)
-
-[node name="Room1" type="Node" parent="."]
-
-[node name="RigidBody2D" type="StaticBody2D" parent="Room1"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Room1/RigidBody2D"]
-build_mode = 1
-polygon = PackedVector2Array(-1, 64, -1, 0, 255, 0, 255, 64, 255, 64, 247, 64, 247, 8, 7, 8, 7, 64)
-
-[node name="RigidBody2D2" type="StaticBody2D" parent="Room1"]
-
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Room1/RigidBody2D2"]
-polygon = PackedVector2Array(7, 128, 7, 184, 247, 184, 247, 128, 255, 128, 255, 192, -1, 192, -1, 128)
+[node name="Walkway" parent="Room1" instance=ExtResource("2_rib5f")]
+position = Vector2(319, 64)
+rotation = 1.5708
 
 [node name="Character" parent="." instance=ExtResource("2_8dtn7")]
-position = Vector2(31, 96)
+position = Vector2(-24, 96)
 rotation = 0.0
