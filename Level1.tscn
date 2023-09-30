@@ -8,20 +8,27 @@
 [node name="Level" type="Node"]
 script = ExtResource("1_8h056")
 
-[node name="Room1" parent="." instance=ExtResource("1_4vhe8")]
+[node name="Room1" parent="." groups=["Rooms"] instance=ExtResource("1_4vhe8")]
 position = Vector2(64, 0)
 
-[node name="Walkway" parent="Room1" instance=ExtResource("2_rib5f")]
-position = Vector2(319, 64)
-rotation = 1.5708
+[node name="Room2" parent="." groups=["Rooms"] instance=ExtResource("1_4vhe8")]
+position = Vector2(448, 0)
 
 [node name="Walkway" parent="." instance=ExtResource("2_rib5f")]
 position = Vector2(64, 64)
 rotation = 1.5708
 
-[node name="Character" parent="." instance=ExtResource("2_8dtn7")]
-position = Vector2(24, 96)
-rotation = 0.0
+[node name="Walkway4" parent="." instance=ExtResource("2_rib5f")]
+position = Vector2(384, 64)
+rotation = 1.5708
 
 [node name="Walkway2" parent="." instance=ExtResource("2_rib5f")]
 position = Vector2(-64, 64)
+
+[node name="Walkway3" parent="." instance=ExtResource("2_rib5f")]
+position = Vector2(448, 64)
+rotation = 1.5708
+
+[node name="Character" parent="." instance=ExtResource("2_8dtn7")]
+position = Vector2(24, 96)
+rotation = 0.0

@@ -27,18 +27,8 @@ public partial class Main : Node2D
 
 	public void _on_start_button_pressed() {
 		GameStarted = true;
-		GetTree().ChangeSceneToFile("res://Level1.tscn");
-		OpenNextDoor();
-	}
-
-	public void OpenNextDoor() {
-
-		// If it's the first roomo
-		if (CurrentRoom == null) {
-			// CurrentRoom = 
-		}
-		CompletedRooms[CompletedRooms.Length] = CurrentRoom;
-
 		
+		// Open the first level
+		GetTree().ChangeSceneToFile("res://Level1.tscn");
 	}
 }
