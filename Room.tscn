@@ -30,7 +30,7 @@ sources/0 = SubResource("TileSetAtlasSource_jwls7")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4w8qk"]
 size = Vector2(8, 64)
 
-[node name="Room" type="TileMap"]
+[node name="HorizontalRoom" type="TileMap"]
 position = Vector2(1, 0)
 tile_set = SubResource("TileSet_xgcbw")
 format = 2

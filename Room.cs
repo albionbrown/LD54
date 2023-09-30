@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Room : Area2D
+public partial class Room : TileMap
 {
 
 	[Export]
@@ -29,7 +29,14 @@ public partial class Room : Area2D
 
 	}
 
-	public void OpenFirstDoor() {
-		
+	public void OpenDoor(int doorNumber) {
+		StaticBody2D door = GetNode<StaticBody2D>("Door" + doorNumber);
+		if (door != null) {
+			// door.GetNode<CollisionObject2D>()
+		}
+	}
+
+	public void completed() {
+		Completed = true;
 	}
 }

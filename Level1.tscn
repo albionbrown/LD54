@@ -1,17 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcsdhwf32fjfj"]
+[gd_scene load_steps=5 format=3 uid="uid://bcsdhwf32fjfj"]
 
 [ext_resource type="PackedScene" uid="uid://cq7olfoq7q73f" path="res://Room.tscn" id="1_4vhe8"]
+[ext_resource type="Script" path="res://Level.cs" id="1_8h056"]
 [ext_resource type="PackedScene" uid="uid://djahqfp1a8mq1" path="res://Character.tscn" id="2_8dtn7"]
 [ext_resource type="PackedScene" uid="uid://4w83sbrb04u" path="res://Walkway.tscn" id="2_rib5f"]
 
-[node name="Node" type="Node"]
+[node name="Level" type="Node"]
+script = ExtResource("1_8h056")
 
 [node name="Room1" parent="." instance=ExtResource("1_4vhe8")]
+position = Vector2(64, 0)
 
 [node name="Walkway" parent="Room1" instance=ExtResource("2_rib5f")]
 position = Vector2(319, 64)
 rotation = 1.5708
 
+[node name="Walkway" parent="." instance=ExtResource("2_rib5f")]
+position = Vector2(64, 64)
+rotation = 1.5708
+
 [node name="Character" parent="." instance=ExtResource("2_8dtn7")]
-position = Vector2(-24, 96)
+position = Vector2(24, 96)
 rotation = 0.0
+
+[node name="Walkway2" parent="." instance=ExtResource("2_rib5f")]
+position = Vector2(-64, 64)
