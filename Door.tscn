@@ -70,6 +70,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(0, 393216, 0)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+disable_mode = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(4, 32)

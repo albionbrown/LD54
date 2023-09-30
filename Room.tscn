@@ -59,9 +59,9 @@ visible = false
 position = Vector2(128, 96)
 shape = SubResource("RectangleShape2D_oed7m")
 
-[node name="Door1" parent="." instance=ExtResource("3_684tp")]
+[node name="Door1" parent="." groups=["Doors"] instance=ExtResource("3_684tp")]
 position = Vector2(0, 64)
 
-[node name="Door2" parent="." instance=ExtResource("3_684tp")]
+[node name="Door2" parent="." groups=["Doors"] instance=ExtResource("3_684tp")]
 position = Vector2(256, 128)
 rotation = 3.14159

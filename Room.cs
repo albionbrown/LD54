@@ -8,7 +8,7 @@ public partial class Room : TileMap
 	[Export]
 	protected String Name;
 
-	protected List<Node> Doors;
+	protected List<Door> Doors;
 
 	private bool Completed;
 
@@ -16,11 +16,11 @@ public partial class Room : TileMap
 	public override void _Ready()
 	{
 		var children = GetChildren();
-		Doors = new List<Node>();
+		Doors = new List<Door>();
 
 		foreach(Node node in children) {
 			if (node.IsInGroup("Doors")) {
-				Doors.Add(node);
+				Doors.Add((Door)node);
 			}
 		}
 	}
@@ -43,18 +43,18 @@ public partial class Room : TileMap
 
 		// In the UI, we start from 1 in the node's name.
 		doorNumber++;
-		StaticBody2D door = GetNode<StaticBody2D>("Door" + doorNumber);
+		Door door = (Door)GetNode<Node2D>("Door" + doorNumber);
 		if (door != null) {
 
 			// Change the door's tile to open it.
-			
+			door.SetOpen();
 
 			// Set the door's collision object to be disabled.
-			CollisionShape2D doorCollision = door.GetNode<CollisionShape2D>("CollisionShape2D");
-			door.ProcessMode = ;
-			doorCollision.SetDeferred("Disabled", true);
-			// doorCollision.Disabled = false;
-			door.Hide();
+			// CollisionShape2D doorCollision = door.GetNode<CollisionShape2D>("CollisionShape2D");
+			// door.ProcessMode = ;
+			// doorCollision.SetDeferred("Disabled", true);
+			// // doorCollision.Disabled = false;
+			// door.Hide();
 		}
 	}
 
