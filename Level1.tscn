@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcsdhwf32fjfj"]
+[gd_scene load_steps=6 format=3 uid="uid://bcsdhwf32fjfj"]
 
 [ext_resource type="PackedScene" uid="uid://cq7olfoq7q73f" path="res://Room.tscn" id="1_4vhe8"]
 [ext_resource type="Script" path="res://Level.cs" id="1_8h056"]
 [ext_resource type="PackedScene" uid="uid://djahqfp1a8mq1" path="res://Character.tscn" id="2_8dtn7"]
 [ext_resource type="PackedScene" uid="uid://4w83sbrb04u" path="res://Walkway.tscn" id="2_rib5f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ea5df"]
+size = Vector2(8, 64)
 
 [node name="Level" type="Node"]
 script = ExtResource("1_8h056")
@@ -20,6 +23,12 @@ color = Color(0, 0, 0, 1)
 position = Vector2(64, 0)
 Name = "The First Room"
 
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-4, 96)
+shape = SubResource("RectangleShape2D_ea5df")
+
 [node name="Room2" parent="." groups=["Rooms"] instance=ExtResource("1_4vhe8")]
 position = Vector2(448, 0)
 
@@ -30,9 +39,6 @@ rotation = 1.5708
 [node name="Walkway4" parent="." instance=ExtResource("2_rib5f")]
 position = Vector2(384, 64)
 rotation = 1.5708
-
-[node name="Walkway2" parent="." instance=ExtResource("2_rib5f")]
-position = Vector2(-64, 64)
 
 [node name="Walkway3" parent="." instance=ExtResource("2_rib5f")]
 position = Vector2(448, 64)
