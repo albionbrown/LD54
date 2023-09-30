@@ -8,6 +8,14 @@
 [node name="Level" type="Node"]
 script = ExtResource("1_8h056")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -624.0
+offset_top = -264.0
+offset_right = 2256.0
+offset_bottom = 1360.0
+color = Color(0, 0, 0, 1)
+
 [node name="Room1" parent="." groups=["Rooms"] instance=ExtResource("1_4vhe8")]
 position = Vector2(64, 0)
 Name = "The First Room"
@@ -31,11 +39,24 @@ position = Vector2(448, 64)
 rotation = 1.5708
 
 [node name="Character" parent="." groups=["Player"] instance=ExtResource("2_8dtn7")]
-position = Vector2(88, 96)
+position = Vector2(16, 96)
 rotation = 0.0
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Character"]
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(88, 96)
+position = Vector2(16, 96)
+
+[node name="RoomName" type="RichTextLabel" parent="."]
+offset_left = 68.0
+offset_top = -96.0
+offset_right = 315.0
+offset_bottom = -8.0
+text = "Room Name"
+
+[node name="OpenFirstDoorTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="OpenFirstDoorTimer" to="." method="_on_start_timer_timeout"]

@@ -37,7 +37,8 @@ public partial class Character : CharacterBody2D
 		return input.Normalized();
 	}
 
-	protected void Movement(double delta) {
+	protected void Movement(double delta) 
+	{
 
 		Vector2 input = GetInput();
 

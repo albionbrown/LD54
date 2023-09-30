@@ -15,6 +15,9 @@ public partial class Room : TileMap
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+
+		Completed = false;
+
 		var children = GetChildren();
 		Doors = new List<Door>();
 
@@ -33,10 +36,16 @@ public partial class Room : TileMap
 	}
 
 	// Display the room name
-	public void PlayerEnters() {
+	public void PlayerEnters() 
+	{
 
-		// @todo display name
 		
+	}
+
+	public void DisplayRoomName() 
+	{
+		Level level = (Level)GetParent();
+		level.SetRoomName(Name);
 	}
 
 	public void OpenDoor(int doorNumber) {
@@ -46,23 +55,23 @@ public partial class Room : TileMap
 		Door door = (Door)GetNode<Node2D>("Door" + doorNumber);
 		if (door != null) {
 
-			// Change the door's tile to open it.
 			door.SetOpen();
-
-			// Set the door's collision object to be disabled.
-			// CollisionShape2D doorCollision = door.GetNode<CollisionShape2D>("CollisionShape2D");
-			// door.ProcessMode = ;
-			// doorCollision.SetDeferred("Disabled", true);
-			// // doorCollision.Disabled = false;
-			// door.Hide();
 		}
 	}
 
-	public void CompleteRoom() {
+	public void CompleteRoom()
+	{
 		Completed = true;
 	}
 
-	public void _on_room_area_body_entered(Node2D body) {
-		PlayerEnters();
+	public void _on_room_area_body_entered(Node2D body) 
+	{
+		if (body.IsInGroup("Player")) {
+			if (!Completed) {
+				DisplayRoomName();
+			}
+			
+			PlayerEnters();
+		}
 	}
 }

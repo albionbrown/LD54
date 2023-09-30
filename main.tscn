@@ -6,12 +6,22 @@
 script = ExtResource("1_75bc6")
 
 [node name="StartButton" type="Button" parent="."]
-offset_left = 456.0
-offset_top = 352.0
-offset_right = 736.0
-offset_bottom = 512.0
+offset_left = 512.0
+offset_top = 488.0
+offset_right = 792.0
+offset_bottom = 648.0
 text = "START
 "
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 264.0
+offset_top = 32.0
+offset_right = 992.0
+offset_bottom = 424.0
+text = "Welcome to this whatever it is
+
+Controls: WSAD movement
+Action: Space"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="StartButton" to="StartButton" method="_on_pressed"]
