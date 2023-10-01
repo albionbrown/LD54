@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqxatv04x4o63"]
+[gd_scene load_steps=9 format=3 uid="uid://dqxatv04x4o63"]
 
 [ext_resource type="Script" path="res://Door.cs" id="1_nb3y8"]
 [ext_resource type="Texture2D" uid="uid://cswy4isadiy1c" path="res://assets/img/TileSet.png" id="1_njwmt"]
@@ -53,10 +53,13 @@ texture_region_size = Vector2i(64, 64)
 tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_qcf2o")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sa3x1"]
+size = Vector2(128, 64)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wm4bx"]
 size = Vector2(8, 64)
 
-[node name="Door" type="Node2D"]
+[node name="Door" type="Area2D"]
 script = ExtResource("1_nb3y8")
 
 [node name="OpenedTileMap" type="TileMap" parent="."]
@@ -69,9 +72,23 @@ tile_set = SubResource("TileSet_8pmnv")
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 393216, 0)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_sa3x1")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 disable_mode = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(4, 32)
 shape = SubResource("RectangleShape2D_wm4bx")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+offset_left = -32.0
+offset_top = -48.0
+offset_right = 40.0
+text = "Space to open"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

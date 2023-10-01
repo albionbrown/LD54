@@ -12,14 +12,15 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ea5df"]
 size = Vector2(8, 64)
 
-[node name="Level" type="Node"]
+[node name="Level" type="Node" node_paths=PackedStringArray("FirstDoor")]
 script = ExtResource("1_8h056")
+FirstDoor = NodePath("Room1/Door")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -624.0
-offset_top = -264.0
-offset_right = 2256.0
-offset_bottom = 1360.0
+offset_left = -640.0
+offset_top = -304.0
+offset_right = 2240.0
+offset_bottom = 1320.0
 color = Color(0, 0, 0, 1)
 
 [node name="Room1" parent="." groups=["Rooms"] instance=ExtResource("1_4vhe8")]
@@ -36,7 +37,7 @@ UnlocksDoors = [NodePath("../Door2"), NodePath("../../Room2/Door")]
 position = Vector2(63.9999, -16)
 rotation = 3.14159
 
-[node name="Door1" parent="Room1" instance=ExtResource("5_7e40v")]
+[node name="Door" parent="Room1" instance=ExtResource("5_7e40v")]
 position = Vector2(0, 64)
 
 [node name="Door2" parent="Room1" instance=ExtResource("5_7e40v")]
@@ -97,8 +98,17 @@ rotation = 0.0
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Character"]
 remote_path = NodePath("../../Camera2D")
 
-[node name="Key" parent="." instance=ExtResource("8_stw1h")]
+[node name="Key" parent="." node_paths=PackedStringArray("UnlockDoors") instance=ExtResource("8_stw1h")]
 position = Vector2(192, 96)
+UnlockDoors = [NodePath("../Room1/Door2")]
+
+[node name="Key2" parent="." node_paths=PackedStringArray("UnlockDoors") instance=ExtResource("8_stw1h")]
+position = Vector2(408, 96)
+UnlockDoors = [NodePath("../Room2/Door")]
+
+[node name="Key3" parent="." node_paths=PackedStringArray("UnlockDoors") instance=ExtResource("8_stw1h")]
+position = Vector2(576, 96)
+UnlockDoors = [NodePath("../Room1/Door")]
 
 [connection signal="body_exited" from="Room1/Keypad1" to="Room1/Keypad1" method="_on_body_exited"]
 [connection signal="timeout" from="OpenFirstDoorTimer" to="." method="_on_start_timer_timeout"]

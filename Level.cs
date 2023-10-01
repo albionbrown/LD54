@@ -6,6 +6,9 @@ using System.Linq;
 public partial class Level : Node
 {
 
+	[Export]
+	private Door FirstDoor;
+
 	protected List<Room> Rooms;
 
 	protected RichTextLabel RoomNameLabel;
@@ -40,8 +43,7 @@ public partial class Level : Node
 
 	public void OpenFirstDoor() 
 	{
-		Room firstRoom = Rooms[0];
-		firstRoom.OpenDoor(0);
+		FirstDoor.SetOpen();
 	}
 
 	public void SetRoomName(String roomName)

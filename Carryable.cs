@@ -4,9 +4,9 @@ public abstract partial class Carryable : Area2D
 {
   private bool BeingCarried;
 
-	private CharacterBody2D CarriedBy;
+	private Character CarriedBy;
 
-  private CharacterBody2D CharacterInArea;
+  private Character CharacterInArea;
 
   public override void _Ready()
 	{
@@ -24,14 +24,15 @@ public abstract partial class Carryable : Area2D
     BeingCarried = beingCarried;
   }
 
-  public CharacterBody2D GetCarriedBy() 
+  public Character GetCarriedBy() 
   {
     return CarriedBy;
   }
 
-  public void SetCarriedBy(CharacterBody2D node = null) 
+  public void SetCarriedBy(Character node = null) 
   {
     CarriedBy = node;
+    CarriedBy.SetCarrying(this);
   }
   
   public override void _Process(double delta)
@@ -41,11 +42,11 @@ public abstract partial class Carryable : Area2D
 			// Node2D CarryPosition = character.GetNode<Node2D>("/root/Level/Character/CollisionShape2D/CarryCoordinates");
 			Position = CarriedBy.Position;
 
-      if (Input.IsActionJustPressed("space")) {
+      if (Input.IsActionJustPressed("pickup_putdown")) {
         SetBeingCarried(false);
       }
 		}
-    else if (CharacterInArea != null && Input.IsActionJustPressed("space")) {
+    else if (CharacterInArea != null && Input.IsActionJustPressed("pickup_putdown")) {
       SetBeingCarried();
       SetCarriedBy(CharacterInArea);
       CharacterInArea = null;
@@ -56,7 +57,7 @@ public abstract partial class Carryable : Area2D
   {
 
 		if (node.IsInGroup("Player") && !BeingCarried) {
-      CharacterInArea = (CharacterBody2D)node;
+      CharacterInArea = (Character)node;
 		}
 	}
 

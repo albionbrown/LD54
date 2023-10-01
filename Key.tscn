@@ -133,8 +133,9 @@ sources/0 = SubResource("TileSetAtlasSource_w16yd")
 [sub_resource type="CircleShape2D" id="CircleShape2D_khj3s"]
 radius = 24.0
 
-[node name="Key" type="Area2D"]
+[node name="Key" type="Area2D" node_paths=PackedStringArray("UnlockDoors") groups=["Keys"]]
 script = ExtResource("1_uoax8")
+UnlockDoors = []
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-8, -8)

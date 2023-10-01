@@ -15,6 +15,10 @@ public partial class Door : Node2D
 
 	private uint DefaultCollisionLayer;
 	private uint DefaultCollisionMask;
+	
+	private Character PlayerNear;
+
+	private RichTextLabel Label;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -27,14 +31,38 @@ public partial class Door : Node2D
 
 		DefaultCollisionLayer = 1;
 		DefaultCollisionMask = 1;
+
+		Label = GetNode<RichTextLabel>("RichTextLabel");
+		Label.Hide();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+
+		if (PlayerNear != null) {
+			if (!Open) {
+				Label.Show();
+			}
+
+			Node2D playerCarrying = PlayerNear.GetCarrying();
+			if (Input.IsActionJustPressed("space") && playerCarrying.IsInGroup("Keys")) {
+				Key key = (Key)playerCarrying;
+				if (key.CheckKeyUnlocksDoor(this)) {
+					key.UnlockDoor(this);
+					key.QueueFree();
+					PlayerNear.SetCarrying(null);
+					playerCarrying = null;
+				}
+			}
+		}
+		else {
+			Label.Hide();
+		}
 	}
 
-	public void SetOpen(bool open = true) {
+	public void SetOpen(bool open = true)
+	{
 		Open = open;
 		if (Open) {
 			ClosedTileMap.Hide();
@@ -50,7 +78,22 @@ public partial class Door : Node2D
 		}
 	}
 
-	public bool isOpen() {
+	public bool isOpen()
+	{
 		return Open;
+	}
+
+	public void _on_body_entered(Node2D node)
+	{
+		if (node.IsInGroup("Player")) {
+			PlayerNear = (Character)node;
+		}
+	}
+
+	public void _on_body_exited(Node2D node)
+	{
+		if (node.IsInGroup("Player")) {
+			PlayerNear = null;
+		}
 	}
 }

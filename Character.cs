@@ -25,6 +25,7 @@ public partial class Character : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -55,10 +56,18 @@ public partial class Character : CharacterBody2D
 		else {
 			Velocity += (input * acceleration * (float)delta);
 			Velocity = Velocity.LimitLength(maxSpeed);
-			// Rotation = (float)((Math.Atan2(Velocity.Y, Velocity.X)) * (180/Math.PI));
+			
 			LookAt(Position + Velocity);
 		}
 
 		MoveAndSlide();
+	}
+
+	public void SetCarrying(Node2D node) {
+		Carrying = node;
+	}
+
+	public Node2D GetCarrying() {
+		return Carrying;
 	}
 }

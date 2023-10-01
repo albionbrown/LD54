@@ -41,7 +41,7 @@ public partial class Keypad : Node2D
 		if (PlayerNear && Input.IsActionPressed("space")) {
 			// @todo show form
 			KeypadForm.Toggle();
-			Correct();
+			// Correct();
 		}
 
 		// if (KeypadForm.GetCorrect()) {
