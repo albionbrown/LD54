@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8intm5tu0ucy"]
+
+[ext_resource type="Script" path="res://KeypadForm.cs" id="1_1fntn"]
+
+[node name="KeypadForm" type="Node2D"]
+script = ExtResource("1_1fntn")
+
+[node name="AnswerInput" type="TextEdit" parent="."]
+offset_right = 128.0
+offset_bottom = 40.0
+
+[node name="CheckButton" type="Button" parent="."]
+offset_left = 24.0
+offset_top = 64.0
+offset_right = 104.0
+offset_bottom = 88.0
+text = "CHECK"

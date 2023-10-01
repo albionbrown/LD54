@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcsdhwf32fjfj"]
+[gd_scene load_steps=8 format=3 uid="uid://bcsdhwf32fjfj"]
 
 [ext_resource type="PackedScene" uid="uid://cq7olfoq7q73f" path="res://Room.tscn" id="1_4vhe8"]
 [ext_resource type="Script" path="res://Level.cs" id="1_8h056"]
 [ext_resource type="PackedScene" uid="uid://djahqfp1a8mq1" path="res://Character.tscn" id="2_8dtn7"]
 [ext_resource type="PackedScene" uid="uid://4w83sbrb04u" path="res://Walkway.tscn" id="2_rib5f"]
+[ext_resource type="PackedScene" uid="uid://ct1eifu3d62fs" path="res://Keypad.tscn" id="3_30xtf"]
+[ext_resource type="PackedScene" uid="uid://b8intm5tu0ucy" path="res://KeypadForm.tscn" id="4_lx2bb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ea5df"]
 size = Vector2(8, 64)
@@ -12,7 +14,6 @@ size = Vector2(8, 64)
 script = ExtResource("1_8h056")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 offset_left = -624.0
 offset_top = -264.0
 offset_right = 2256.0
@@ -22,6 +23,16 @@ color = Color(0, 0, 0, 1)
 [node name="Room1" parent="." groups=["Rooms"] instance=ExtResource("1_4vhe8")]
 position = Vector2(64, 0)
 Name = "The First Room"
+
+[node name="Keypad1" parent="Room1" node_paths=PackedStringArray("KeypadForm") instance=ExtResource("3_30xtf")]
+position = Vector2(248, 144)
+rotation = 3.14159
+KeypadForm = NodePath("KeypadForm")
+UnlocksDoor = 2
+
+[node name="KeypadForm" parent="Room1/Keypad1" instance=ExtResource("4_lx2bb")]
+position = Vector2(63.9999, -16)
+rotation = 3.14159
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -65,4 +76,10 @@ text = "Room Name"
 wait_time = 2.0
 one_shot = true
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -184.0
+offset_top = -120.0
+text = "Welcome to {name}."
+
+[connection signal="body_exited" from="Room1/Keypad1" to="Room1/Keypad1" method="_on_body_exited"]
 [connection signal="timeout" from="OpenFirstDoorTimer" to="." method="_on_start_timer_timeout"]

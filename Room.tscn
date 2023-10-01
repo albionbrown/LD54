@@ -62,6 +62,7 @@ rotation = 3.14159
 [node name="RoomArea" type="Area2D" parent="."]
 
 [node name="RoomAreaCollision" type="CollisionShape2D" parent="RoomArea"]
+visible = false
 position = Vector2(128, 96)
 shape = SubResource("RectangleShape2D_oed7m")
 

@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct1eifu3d62fs"]
+
+[ext_resource type="Script" path="res://Keypad.cs" id="1_iqotg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uar3w"]
+size = Vector2(16, 24)
+
+[node name="Keypad" type="Area2D"]
+position = Vector2(0, 8)
+script = ExtResource("1_iqotg")
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 2.0
+offset_bottom = 8.0
+color = Color(0.835294, 0.113725, 0.121569, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 4)
+shape = SubResource("RectangleShape2D_uar3w")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

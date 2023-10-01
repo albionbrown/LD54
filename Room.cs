@@ -21,7 +21,7 @@ public partial class Room : TileMap
 		var children = GetChildren();
 		Doors = new List<Door>();
 
-		foreach(Node node in children) {
+		foreach (Node node in children) {
 			if (node.IsInGroup("Doors")) {
 				Doors.Add((Door)node);
 			}
@@ -35,11 +35,8 @@ public partial class Room : TileMap
 
 	}
 
-	// Display the room name
-	public void PlayerEnters() 
-	{
-
-		
+	public List<Door> GetDoors() {
+		return Doors;
 	}
 
 	public void DisplayRoomName() 
@@ -70,8 +67,6 @@ public partial class Room : TileMap
 			if (!Completed) {
 				DisplayRoomName();
 			}
-			
-			PlayerEnters();
 		}
 	}
 }
