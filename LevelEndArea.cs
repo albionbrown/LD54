@@ -19,8 +19,9 @@ public partial class LevelEndArea : Node2D
 			SceneTree sceneTree = GetTree();
 			Window root = sceneTree.Root;
 			Level level = (Level)root.GetChild(0);
+			int nextLevel = level.GetLevelNumber()+1;
 
-			sceneTree.ChangeSceneToFile("res://Level"+level.GetLevelNumber()+1+".tscn");
+			sceneTree.ChangeSceneToFile($"res://Level{nextLevel}.tscn");
 		}
 	}
 }

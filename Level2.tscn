@@ -8,3 +8,4 @@ script = ExtResource("1_1a75x")
 LevelNumber = 2
 
 [node name="Character" parent="." instance=ExtResource("2_vcdcf")]
+position = Vector2(624, 344)

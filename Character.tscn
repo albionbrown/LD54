@@ -29,3 +29,9 @@ sprite_frames = SubResource("SpriteFrames_edr1y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_p4sxy")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../Camera2D")
+update_rotation = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
