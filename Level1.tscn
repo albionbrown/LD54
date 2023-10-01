@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bcsdhwf32fjfj"]
+[gd_scene load_steps=9 format=3 uid="uid://bcsdhwf32fjfj"]
 
 [ext_resource type="PackedScene" uid="uid://cq7olfoq7q73f" path="res://Room.tscn" id="1_4vhe8"]
 [ext_resource type="Script" path="res://Level.cs" id="1_8h056"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://4w83sbrb04u" path="res://Walkway.tscn" id="2_rib5f"]
 [ext_resource type="PackedScene" uid="uid://ct1eifu3d62fs" path="res://Keypad.tscn" id="3_30xtf"]
 [ext_resource type="PackedScene" uid="uid://b8intm5tu0ucy" path="res://KeypadForm.tscn" id="4_lx2bb"]
+[ext_resource type="PackedScene" uid="uid://dqxatv04x4o63" path="res://Door.tscn" id="5_7e40v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ea5df"]
 size = Vector2(8, 64)
@@ -24,14 +25,21 @@ color = Color(0, 0, 0, 1)
 position = Vector2(64, 0)
 Name = "The First Room"
 
-[node name="Keypad1" parent="Room1" node_paths=PackedStringArray("KeypadForm") instance=ExtResource("3_30xtf")]
+[node name="Keypad1" parent="Room1" node_paths=PackedStringArray("KeypadForm", "UnlocksDoors") instance=ExtResource("3_30xtf")]
 position = Vector2(248, 144)
 rotation = 3.14159
 KeypadForm = NodePath("KeypadForm")
-UnlocksDoor = 2
+UnlocksDoors = [NodePath("../Door2"), NodePath("../../Room2/Door")]
 
 [node name="KeypadForm" parent="Room1/Keypad1" instance=ExtResource("4_lx2bb")]
 position = Vector2(63.9999, -16)
+rotation = 3.14159
+
+[node name="Door1" parent="Room1" instance=ExtResource("5_7e40v")]
+position = Vector2(0, 64)
+
+[node name="Door2" parent="Room1" instance=ExtResource("5_7e40v")]
+position = Vector2(256, 128)
 rotation = 3.14159
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -42,6 +50,13 @@ shape = SubResource("RectangleShape2D_ea5df")
 
 [node name="Room2" parent="." groups=["Rooms"] instance=ExtResource("1_4vhe8")]
 position = Vector2(448, 0)
+
+[node name="Door" parent="Room2" instance=ExtResource("5_7e40v")]
+position = Vector2(0, 64)
+
+[node name="Door2" parent="Room2" instance=ExtResource("5_7e40v")]
+position = Vector2(256, 128)
+rotation = 3.14159
 
 [node name="Walkway" parent="." instance=ExtResource("2_rib5f")]
 position = Vector2(64, 64)

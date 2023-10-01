@@ -18,14 +18,14 @@ public partial class Room : TileMap
 
 		Completed = false;
 
-		var children = GetChildren();
-		Doors = new List<Door>();
+		// var children = GetChildren();
+		// Doors = new List<Door>();
 
-		foreach (Node node in children) {
-			if (node.IsInGroup("Doors")) {
-				Doors.Add((Door)node);
-			}
-		}
+		// foreach (Node node in children) {
+		// 	if (node.IsInGroup("Doors")) {
+		// 		Doors.Add((Door)node);
+		// 	}
+		// }
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

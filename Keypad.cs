@@ -12,7 +12,7 @@ public partial class Keypad : Node2D
 	private KeypadForm KeypadForm;
 
 	[Export]
-	private int UnlocksDoor;
+	private Door[] UnlocksDoors;
 
 	[Export]
 	private String UnlockCode;
@@ -20,8 +20,6 @@ public partial class Keypad : Node2D
 	private Room Room;
 
 	private Color DefaultColour;
-
-	private Door Door;
 
 	private bool PlayerNear;
 
@@ -35,8 +33,6 @@ public partial class Keypad : Node2D
 		colorRect.Color = DefaultColour;
 
 		PlayerNear = false;
-
-		Door = Room.GetNode<Door>("Door" + UnlocksDoor);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -45,11 +41,12 @@ public partial class Keypad : Node2D
 		if (PlayerNear && Input.IsActionPressed("space")) {
 			// @todo show form
 			KeypadForm.Toggle();
-		}
-
-		if (KeypadForm.GetCorrect()) {
 			Correct();
 		}
+
+		// if (KeypadForm.GetCorrect()) {
+			// Correct();
+		// }
 	}
 
 	public void _on_body_entered(Node2D node) {
@@ -63,7 +60,9 @@ public partial class Keypad : Node2D
 
 	public void Correct() {
 
-		Door.SetOpen();
+		foreach (Door door in UnlocksDoors) {
+			door.SetOpen();
+		}
 	}
 
 	public void _on_body_exited(Node2D node) {

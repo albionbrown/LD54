@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cq7olfoq7q73f"]
+[gd_scene load_steps=6 format=3 uid="uid://cq7olfoq7q73f"]
 
 [ext_resource type="Script" path="res://Room.cs" id="1_a0gga"]
 [ext_resource type="Texture2D" uid="uid://cswy4isadiy1c" path="res://assets/img/TileSet.png" id="1_o8yhg"]
-[ext_resource type="PackedScene" uid="uid://dqxatv04x4o63" path="res://Door.tscn" id="3_684tp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jwls7"]
 resource_name = "Background"
@@ -51,13 +50,6 @@ position = Vector2(-1, 0)
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="RigidBody2D2"]
 position = Vector2(2, 0)
 polygon = PackedVector2Array(7, 128, 7, 184, 247, 184, 247, 128, 255, 128, 255, 192, -1, 192, -1, 128)
-
-[node name="Door1" parent="." groups=["Doors"] instance=ExtResource("3_684tp")]
-position = Vector2(0, 64)
-
-[node name="Door2" parent="." groups=["Doors"] instance=ExtResource("3_684tp")]
-position = Vector2(256, 128)
-rotation = 3.14159
 
 [node name="RoomArea" type="Area2D" parent="."]
 
