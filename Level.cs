@@ -29,9 +29,6 @@ public partial class Level : Node
 			}
 		}
 
-		RoomNameLabel = GetNode<RichTextLabel>("RoomName");
-		RoomNameLabel.Hide();
-
 		Timer startTimer = GetNode<Timer>("OpenFirstDoorTimer");
 		startTimer.Start();
 	}
@@ -44,12 +41,6 @@ public partial class Level : Node
 	public void OpenFirstDoor() 
 	{
 		FirstDoor.SetOpen();
-	}
-
-	public void SetRoomName(String roomName)
-	{
-		RoomNameLabel.Text = roomName;
-		RoomNameLabel.Show();
 	}
 
 	public void _on_start_timer_timeout() {

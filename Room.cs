@@ -12,12 +12,15 @@ public partial class Room : TileMap
 
 	private bool Completed;
 
+	private RichTextLabel RoomNameLabel;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 
 		Completed = false;
-
+		RoomNameLabel = GetNode<RichTextLabel>("RoomNameLabel");
+		RoomNameLabel.Hide();
 		// var children = GetChildren();
 		// Doors = new List<Door>();
 
@@ -41,8 +44,8 @@ public partial class Room : TileMap
 
 	public void DisplayRoomName() 
 	{
-		Level level = (Level)GetParent();
-		level.SetRoomName(Name);
+		RoomNameLabel.Text = Name;
+		RoomNameLabel.Show();
 	}
 
 	public void OpenDoor(int doorNumber) {

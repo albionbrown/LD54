@@ -1,11 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bcsdhwf32fjfj"]
+[gd_scene load_steps=8 format=3 uid="uid://bcsdhwf32fjfj"]
 
 [ext_resource type="PackedScene" uid="uid://cq7olfoq7q73f" path="res://Room.tscn" id="1_4vhe8"]
 [ext_resource type="Script" path="res://Level.cs" id="1_8h056"]
 [ext_resource type="PackedScene" uid="uid://djahqfp1a8mq1" path="res://Character.tscn" id="2_8dtn7"]
 [ext_resource type="PackedScene" uid="uid://4w83sbrb04u" path="res://Walkway.tscn" id="2_rib5f"]
-[ext_resource type="PackedScene" uid="uid://ct1eifu3d62fs" path="res://Keypad.tscn" id="3_30xtf"]
-[ext_resource type="PackedScene" uid="uid://b8intm5tu0ucy" path="res://KeypadForm.tscn" id="4_lx2bb"]
 [ext_resource type="PackedScene" uid="uid://dqxatv04x4o63" path="res://Door.tscn" id="5_7e40v"]
 [ext_resource type="PackedScene" uid="uid://bml2dkd1avc5r" path="res://Key.tscn" id="8_stw1h"]
 
@@ -17,32 +15,24 @@ script = ExtResource("1_8h056")
 FirstDoor = NodePath("Room1/Door")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -640.0
-offset_top = -304.0
-offset_right = 2240.0
-offset_bottom = 1320.0
+offset_left = -1544.0
+offset_top = -1560.0
+offset_right = 3024.0
+offset_bottom = 2216.0
 color = Color(0, 0, 0, 1)
 
 [node name="Room1" parent="." groups=["Rooms"] instance=ExtResource("1_4vhe8")]
 position = Vector2(64, 0)
-Name = "The First Room"
+Name = "The Key Room"
 
-[node name="Keypad1" parent="Room1" node_paths=PackedStringArray("KeypadForm", "UnlocksDoors") instance=ExtResource("3_30xtf")]
-position = Vector2(248, 144)
-rotation = 3.14159
-KeypadForm = NodePath("KeypadForm")
-UnlocksDoors = [NodePath("../Door2"), NodePath("../../Room2/Door")]
-
-[node name="KeypadForm" parent="Room1/Keypad1" instance=ExtResource("4_lx2bb")]
-position = Vector2(63.9999, -16)
-rotation = 3.14159
-
-[node name="Door" parent="Room1" instance=ExtResource("5_7e40v")]
+[node name="Door" parent="Room1" node_paths=PackedStringArray("FurtherOpens") instance=ExtResource("5_7e40v")]
 position = Vector2(0, 64)
+FurtherOpens = []
 
-[node name="Door2" parent="Room1" instance=ExtResource("5_7e40v")]
+[node name="Door2" parent="Room1" node_paths=PackedStringArray("FurtherOpens") instance=ExtResource("5_7e40v")]
 position = Vector2(256, 128)
 rotation = 3.14159
+FurtherOpens = [NodePath("../../Room2/Door")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -52,13 +42,16 @@ shape = SubResource("RectangleShape2D_ea5df")
 
 [node name="Room2" parent="." groups=["Rooms"] instance=ExtResource("1_4vhe8")]
 position = Vector2(448, 0)
+Name = "The Key Code Room"
 
-[node name="Door" parent="Room2" instance=ExtResource("5_7e40v")]
+[node name="Door" parent="Room2" node_paths=PackedStringArray("FurtherOpens") instance=ExtResource("5_7e40v")]
 position = Vector2(0, 64)
+FurtherOpens = []
 
-[node name="Door2" parent="Room2" instance=ExtResource("5_7e40v")]
+[node name="Door2" parent="Room2" node_paths=PackedStringArray("FurtherOpens") instance=ExtResource("5_7e40v")]
 position = Vector2(256, 128)
 rotation = 3.14159
+FurtherOpens = []
 
 [node name="Walkway" parent="." instance=ExtResource("2_rib5f")]
 position = Vector2(64, 64)
@@ -74,13 +67,6 @@ rotation = 1.5708
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(16, 96)
-
-[node name="RoomName" type="RichTextLabel" parent="."]
-offset_left = 68.0
-offset_top = -96.0
-offset_right = 315.0
-offset_bottom = -8.0
-text = "Room Name"
 
 [node name="OpenFirstDoorTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -102,14 +88,5 @@ remote_path = NodePath("../../Camera2D")
 position = Vector2(192, 96)
 UnlockDoors = [NodePath("../Room1/Door2")]
 
-[node name="Key2" parent="." node_paths=PackedStringArray("UnlockDoors") instance=ExtResource("8_stw1h")]
-position = Vector2(408, 96)
-UnlockDoors = [NodePath("../Room2/Door")]
-
-[node name="Key3" parent="." node_paths=PackedStringArray("UnlockDoors") instance=ExtResource("8_stw1h")]
-position = Vector2(576, 96)
-UnlockDoors = [NodePath("../Room1/Door")]
-
-[connection signal="body_exited" from="Room1/Keypad1" to="Room1/Keypad1" method="_on_body_exited"]
 [connection signal="timeout" from="OpenFirstDoorTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="body_exited" from="Key" to="Key" method="_on_body_exited"]

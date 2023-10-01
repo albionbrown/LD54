@@ -7,6 +7,9 @@ public partial class Door : Node2D
 	[Export]
 	private bool Open;
 
+	[Export]
+	private Door[] FurtherOpens;
+
 	private TileMap OpenTileMap;
 
 	private TileMap ClosedTileMap;
@@ -41,12 +44,18 @@ public partial class Door : Node2D
 	{
 
 		if (PlayerNear != null) {
-			if (!Open) {
+
+			Node2D playerCarrying = PlayerNear.GetCarrying();
+			if (!Open
+			&& playerCarrying != null 
+			&& playerCarrying.IsInGroup("Keys")) {
 				Label.Show();
 			}
 
-			Node2D playerCarrying = PlayerNear.GetCarrying();
-			if (Input.IsActionJustPressed("space") && playerCarrying.IsInGroup("Keys")) {
+			if (Input.IsActionJustPressed("space") 
+			&& playerCarrying != null 
+			&& playerCarrying.IsInGroup("Keys")) {
+
 				Key key = (Key)playerCarrying;
 				if (key.CheckKeyUnlocksDoor(this)) {
 					key.UnlockDoor(this);
@@ -69,6 +78,11 @@ public partial class Door : Node2D
 			OpenTileMap.Show();
 			DoorBody.CollisionLayer = 0;
 			DoorBody.CollisionMask = 0;
+
+			// Open other doors if configured
+			foreach (Door _door in FurtherOpens) {
+				_door.SetOpen();
+			}
 		}
 		else {
 			ClosedTileMap.Show();
