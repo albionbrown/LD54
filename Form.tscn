@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8intm5tu0ucy"]
+
+[ext_resource type="Script" path="res://Form.cs" id="1_blobs"]
+
+[node name="Form" type="Node2D"]
+script = ExtResource("1_blobs")
+UnlockCode = "123"
+
+[node name="AnswerInput" type="TextEdit" parent="."]
+offset_right = 128.0
+offset_bottom = 40.0
+
+[node name="CheckButton" type="Button" parent="."]
+offset_left = 24.0
+offset_top = 64.0
+offset_right = 104.0
+offset_bottom = 95.0
+text = "CHECK"
+
+[connection signal="pressed" from="CheckButton" to="." method="_on_check_button_pressed"]

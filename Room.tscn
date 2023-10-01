@@ -58,10 +58,4 @@ visible = false
 position = Vector2(128, 96)
 shape = SubResource("RectangleShape2D_oed7m")
 
-[node name="RoomNameLabel" type="RichTextLabel" parent="."]
-offset_left = -1.0
-offset_top = -64.0
-offset_right = 256.0
-text = "Room name"
-
 [connection signal="body_entered" from="RoomArea" to="." method="_on_room_area_body_entered"]

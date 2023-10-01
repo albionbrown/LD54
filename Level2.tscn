@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0w17hjfv3yr7"]
+
+[ext_resource type="Script" path="res://Level.cs" id="1_1a75x"]
+[ext_resource type="PackedScene" uid="uid://djahqfp1a8mq1" path="res://Character.tscn" id="2_vcdcf"]
+
+[node name="Level" type="Node"]
+script = ExtResource("1_1a75x")
+LevelNumber = 2
+
+[node name="Character" parent="." instance=ExtResource("2_vcdcf")]

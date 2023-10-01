@@ -72,7 +72,10 @@ public partial class Door : Node2D
 
 	public void SetOpen(bool open = true)
 	{
+		bool doorOpened = false;
+		
 		Open = open;
+
 		if (Open) {
 			ClosedTileMap.Hide();
 			OpenTileMap.Show();
@@ -81,7 +84,14 @@ public partial class Door : Node2D
 
 			// Open other doors if configured
 			foreach (Door _door in FurtherOpens) {
+				doorOpened = true;
 				_door.SetOpen();
+			}
+
+			// Play the door opening sound
+			if (doorOpened) {
+				AudioStreamPlayer2D audioNode = GetNode<AudioStreamPlayer2D>("DoorOpenAudio");
+				audioNode.Play();
 			}
 		}
 		else {

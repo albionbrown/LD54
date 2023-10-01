@@ -9,6 +9,9 @@ public partial class Level : Node
 	[Export]
 	private Door FirstDoor;
 
+	[Export]
+	private int LevelNumber;
+
 	protected List<Room> Rooms;
 
 	protected RichTextLabel RoomNameLabel;
@@ -40,10 +43,18 @@ public partial class Level : Node
 
 	public void OpenFirstDoor() 
 	{
+		AudioStreamPlayer2D audioNode = FirstDoor.GetNode<AudioStreamPlayer2D>("DoorOpenAudio");
+		audioNode.Play();
 		FirstDoor.SetOpen();
 	}
 
-	public void _on_start_timer_timeout() {
+	public int GetLevelNumber()
+	{
+		return LevelNumber;
+	}
+
+	public void _on_start_timer_timeout() 
+	{
 		OpenFirstDoor();
 	}
 }

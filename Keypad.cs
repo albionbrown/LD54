@@ -9,7 +9,7 @@ public partial class Keypad : Node2D
 	public delegate void DoorUnlockEventHandler(Door door);
 
 	[Export]
-	private KeypadForm KeypadForm;
+	private Form KeypadForm;
 
 	[Export]
 	private Door[] UnlocksDoors;
@@ -23,7 +23,6 @@ public partial class Keypad : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
 		ColorRect colorRect = GetNode<ColorRect>("ColorRect");
 		DefaultColour = new Color("252525");
 		colorRect.Color = DefaultColour;
@@ -35,9 +34,13 @@ public partial class Keypad : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (PlayerNear && Input.IsActionJustPressed("space")) {
-
-			KeypadForm.Toggle();
+		if (PlayerNear) {
+			if ( Input.IsActionJustPressed("space")) {
+				KeypadForm.Show();
+			}
+		}
+		else {
+			KeypadForm.Hide();
 		}
 
 		// Only open the doors once

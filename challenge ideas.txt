@@ -1,2 +1,3 @@
 player has to enter own name to escape
-inverted controls
+inverted controls?
+Number of mentions in text

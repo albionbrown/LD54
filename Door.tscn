@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqxatv04x4o63"]
+[gd_scene load_steps=10 format=3 uid="uid://dqxatv04x4o63"]
 
 [ext_resource type="Script" path="res://Door.cs" id="1_nb3y8"]
 [ext_resource type="Texture2D" uid="uid://cswy4isadiy1c" path="res://assets/img/TileSet.png" id="1_njwmt"]
+[ext_resource type="AudioStream" uid="uid://c6cvee3346088" path="res://assets/audio/door_open.wav" id="3_x0j40"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_esnom"]
 texture = ExtResource("1_njwmt")
@@ -59,8 +60,9 @@ size = Vector2(128, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wm4bx"]
 size = Vector2(8, 64)
 
-[node name="Door" type="Area2D"]
+[node name="Door" type="Area2D" node_paths=PackedStringArray("FurtherOpens")]
 script = ExtResource("1_nb3y8")
+FurtherOpens = []
 
 [node name="OpenedTileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_yhgn5")
@@ -89,6 +91,9 @@ offset_left = -32.0
 offset_top = -48.0
 offset_right = 40.0
 text = "Space to open"
+
+[node name="DoorOpenAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_x0j40")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

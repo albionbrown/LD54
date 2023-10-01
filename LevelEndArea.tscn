@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://scuixe0lgcv3"]
+
+[ext_resource type="Script" path="res://LevelEndArea.cs" id="1_pp2u7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khlem"]
+size = Vector2(64, 64)
+
+[node name="LevelEnd" type="Node2D"]
+script = ExtResource("1_pp2u7")
+
+[node name="LevelEndArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelEndArea"]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_khlem")
+
+[connection signal="body_entered" from="LevelEndArea" to="." method="_on_level_end_area_body_entered"]

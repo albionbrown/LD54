@@ -6,7 +6,7 @@ public partial class Room : TileMap
 {
 
 	[Export]
-	protected String Name;
+	protected String RoomName;
 
 	protected List<Door> Doors;
 
@@ -21,14 +21,6 @@ public partial class Room : TileMap
 		Completed = false;
 		RoomNameLabel = GetNode<RichTextLabel>("RoomNameLabel");
 		RoomNameLabel.Hide();
-		// var children = GetChildren();
-		// Doors = new List<Door>();
-
-		// foreach (Node node in children) {
-		// 	if (node.IsInGroup("Doors")) {
-		// 		Doors.Add((Door)node);
-		// 	}
-		// }
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,17 +38,6 @@ public partial class Room : TileMap
 	{
 		RoomNameLabel.Text = Name;
 		RoomNameLabel.Show();
-	}
-
-	public void OpenDoor(int doorNumber) {
-
-		// In the UI, we start from 1 in the node's name.
-		doorNumber++;
-		Door door = (Door)GetNode<Node2D>("Door" + doorNumber);
-		if (door != null) {
-
-			door.SetOpen();
-		}
 	}
 
 	public void CompleteRoom()

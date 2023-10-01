@@ -1,41 +1,45 @@
-[gd_scene load_steps=11 format=3 uid="uid://bcsdhwf32fjfj"]
+[gd_scene load_steps=16 format=3 uid="uid://bcsdhwf32fjfj"]
 
 [ext_resource type="PackedScene" uid="uid://cq7olfoq7q73f" path="res://Room.tscn" id="1_4vhe8"]
 [ext_resource type="Script" path="res://Level.cs" id="1_8h056"]
 [ext_resource type="PackedScene" uid="uid://djahqfp1a8mq1" path="res://Character.tscn" id="2_8dtn7"]
 [ext_resource type="PackedScene" uid="uid://4w83sbrb04u" path="res://Walkway.tscn" id="2_rib5f"]
 [ext_resource type="PackedScene" uid="uid://ct1eifu3d62fs" path="res://Keypad.tscn" id="3_30xtf"]
-[ext_resource type="PackedScene" uid="uid://b8intm5tu0ucy" path="res://KeypadForm.tscn" id="4_lx2bb"]
 [ext_resource type="PackedScene" uid="uid://dqxatv04x4o63" path="res://Door.tscn" id="5_7e40v"]
+[ext_resource type="PackedScene" uid="uid://b8intm5tu0ucy" path="res://Form.tscn" id="6_6aftg"]
+[ext_resource type="PackedScene" uid="uid://qjo3giev20lb" path="res://Poster.tscn" id="7_bgkvd"]
 [ext_resource type="PackedScene" uid="uid://dtqh52ia60gyj" path="res://Table.tscn" id="8_1avur"]
 [ext_resource type="PackedScene" uid="uid://bml2dkd1avc5r" path="res://Key.tscn" id="8_stw1h"]
+[ext_resource type="PackedScene" uid="uid://b5mcbtnp0werd" path="res://Letter.tscn" id="10_wqof5"]
+[ext_resource type="PackedScene" uid="uid://scuixe0lgcv3" path="res://LevelEndArea.tscn" id="12_2becb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ea5df"]
 size = Vector2(8, 64)
 
+[sub_resource type="Gradient" id="Gradient_h8qcc"]
+offsets = PackedFloat32Array(0, 0.717857)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o0qcl"]
+gradient = SubResource("Gradient_h8qcc")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Level" type="Node" node_paths=PackedStringArray("FirstDoor")]
 script = ExtResource("1_8h056")
 FirstDoor = NodePath("Room1/Door")
+LevelNumber = 1
+
+[node name="OpenFirstDoorTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -1544.0
-offset_top = -1560.0
-offset_right = 3024.0
-offset_bottom = 2216.0
+offset_left = -1448.0
+offset_top = -1536.0
+offset_right = 3120.0
+offset_bottom = 2240.0
 color = Color(0, 0, 0, 1)
-
-[node name="Room1" parent="." groups=["Rooms"] instance=ExtResource("1_4vhe8")]
-position = Vector2(64, 0)
-Name = "The Key Room"
-
-[node name="Door" parent="Room1" node_paths=PackedStringArray("FurtherOpens") instance=ExtResource("5_7e40v")]
-position = Vector2(0, 64)
-FurtherOpens = []
-
-[node name="Door2" parent="Room1" node_paths=PackedStringArray("FurtherOpens") instance=ExtResource("5_7e40v")]
-position = Vector2(256, 128)
-rotation = 3.14159
-FurtherOpens = [NodePath("../../Room2/Door")]
 
 [node name="StartWall" type="StaticBody2D" parent="."]
 
@@ -43,27 +47,80 @@ FurtherOpens = [NodePath("../../Room2/Door")]
 position = Vector2(-4, 96)
 shape = SubResource("RectangleShape2D_ea5df")
 
-[node name="Room2" parent="." groups=["Rooms"] instance=ExtResource("1_4vhe8")]
-position = Vector2(448, 0)
-Name = "The Key Code Room"
+[node name="Room1" parent="." groups=["Rooms"] instance=ExtResource("1_4vhe8")]
+position = Vector2(64, 0)
+RoomName = "The First Room"
 
-[node name="Door" parent="Room2" node_paths=PackedStringArray("FurtherOpens") instance=ExtResource("5_7e40v")]
+[node name="Door" parent="Room1" instance=ExtResource("5_7e40v")]
 position = Vector2(0, 64)
-FurtherOpens = []
 
-[node name="Door2" parent="Room2" node_paths=PackedStringArray("FurtherOpens") instance=ExtResource("5_7e40v")]
+[node name="Door2" parent="Room1" node_paths=PackedStringArray("FurtherOpens") instance=ExtResource("5_7e40v")]
 position = Vector2(256, 128)
 rotation = 3.14159
-FurtherOpens = []
+FurtherOpens = [NodePath("../../Room2/Door")]
+
+[node name="Table" parent="Room1" instance=ExtResource("8_1avur")]
+position = Vector2(64, 8)
+
+[node name="Room2" parent="." groups=["Rooms"] instance=ExtResource("1_4vhe8")]
+position = Vector2(448, 0)
+RoomName = "The Key Code Room"
+
+[node name="Door" parent="Room2" instance=ExtResource("5_7e40v")]
+position = Vector2(0, 64)
+
+[node name="Door2" parent="Room2" instance=ExtResource("5_7e40v")]
+position = Vector2(256, 128)
+rotation = 3.14159
 
 [node name="Keypad" parent="Room2/Door2" node_paths=PackedStringArray("KeypadForm", "UnlocksDoors") instance=ExtResource("3_30xtf")]
 position = Vector2(8, -16)
-KeypadForm = NodePath("KeypadForm")
-UnlocksDoors = [NodePath("..")]
+KeypadForm = NodePath("Form")
+UnlocksDoors = [NodePath(".."), NodePath("../../../Room3/Door")]
 
-[node name="KeypadForm" parent="Room2/Door2/Keypad" instance=ExtResource("4_lx2bb")]
+[node name="Form" parent="Room2/Door2/Keypad" instance=ExtResource("6_6aftg")]
 position = Vector2(64, -24)
+rotation = 3.14159
+
+[node name="Table2" parent="Room2" instance=ExtResource("8_1avur")]
+position = Vector2(192, 184)
 rotation = -3.14159
+
+[node name="Letter" parent="Room2/Table2" node_paths=PackedStringArray("Content") instance=ExtResource("10_wqof5")]
+position = Vector2(32, 16)
+rotation = 3.14159
+Content = NodePath("Content")
+
+[node name="Content" type="RichTextLabel" parent="Room2/Table2/Letter"]
+offset_left = -48.0
+offset_top = 32.0
+offset_right = 40.0
+offset_bottom = 64.0
+text = "Code: 123"
+
+[node name="Table" parent="Room2" instance=ExtResource("8_1avur")]
+position = Vector2(64, 8)
+
+[node name="Poster" parent="Room2" node_paths=PackedStringArray("Content") instance=ExtResource("7_bgkvd")]
+position = Vector2(96, 16)
+Content = NodePath("RichTextLabel")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Room2/Poster"]
+offset_left = 16.0
+offset_top = -128.0
+offset_right = 152.0
+offset_bottom = -24.0
+text = "Old code: xyz"
+
+[node name="Room3" parent="." instance=ExtResource("1_4vhe8")]
+position = Vector2(768, 0)
+
+[node name="Door" parent="Room3" instance=ExtResource("5_7e40v")]
+position = Vector2(0, 64)
+
+[node name="Door2" parent="Room3" instance=ExtResource("5_7e40v")]
+position = Vector2(256, 128)
+rotation = 3.14159
 
 [node name="Walkway" parent="." instance=ExtResource("2_rib5f")]
 position = Vector2(64, 64)
@@ -77,32 +134,45 @@ rotation = 1.5708
 position = Vector2(448, 64)
 rotation = 1.5708
 
+[node name="Walkway2" parent="." instance=ExtResource("2_rib5f")]
+position = Vector2(768, 64)
+rotation = 1.5708
+
+[node name="LevelEnd" parent="." instance=ExtResource("12_2becb")]
+position = Vector2(1024, 64)
+
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(472, 88)
+position = Vector2(16, 96)
+scale = Vector2(0.9, 0.9)
 
-[node name="OpenFirstDoorTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="Introduction" type="RichTextLabel" parent="."]
 offset_left = -184.0
 offset_top = -120.0
-text = "Welcome to {name}."
+offset_bottom = 32.0
+text = "Welcome to Limited Space Escape Rooms.
+
+Controls: WSAD
+Pick up/Put down: E
+Use/Action: Space"
 
 [node name="Character" parent="." groups=["Player"] instance=ExtResource("2_8dtn7")]
-position = Vector2(472, 88)
+position = Vector2(16, 96)
 rotation = 0.0
+scale = Vector2(0.9, 0.9)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Character"]
 remote_path = NodePath("../../Camera2D")
-
-[node name="Table" parent="." instance=ExtResource("8_1avur")]
-position = Vector2(128, 8)
 
 [node name="Key" parent="." node_paths=PackedStringArray("UnlockDoors") instance=ExtResource("8_stw1h")]
 position = Vector2(164, 24)
 UnlockDoors = [NodePath("../Room1/Door2")]
 
-[connection signal="body_exited" from="Room2/Door2/Keypad" to="Room2/Door2/Keypad" method="_on_body_exited"]
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(560, 96)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_o0qcl")
+
 [connection signal="timeout" from="OpenFirstDoorTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="body_exited" from="Room2/Door2/Keypad" to="Room2/Door2/Keypad" method="_on_body_exited"]
 [connection signal="body_exited" from="Key" to="Key" method="_on_body_exited"]
