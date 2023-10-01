@@ -14,39 +14,36 @@ public partial class Keypad : Node2D
 	[Export]
 	private Door[] UnlocksDoors;
 
-	[Export]
-	private String UnlockCode;
-
-	private Room Room;
-
 	private Color DefaultColour;
 
 	private bool PlayerNear;
 
+	private bool Solved;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Room = GetParent<Room>();
 
 		ColorRect colorRect = GetNode<ColorRect>("ColorRect");
 		DefaultColour = new Color("252525");
 		colorRect.Color = DefaultColour;
 
 		PlayerNear = false;
+		Solved = false;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (PlayerNear && Input.IsActionPressed("space")) {
-			// @todo show form
+		if (PlayerNear && Input.IsActionJustPressed("space")) {
+
 			KeypadForm.Toggle();
-			// Correct();
 		}
 
-		// if (KeypadForm.GetCorrect()) {
-			// Correct();
-		// }
+		// Only open the doors once
+		if (Solved ^ (Solved = KeypadForm.GetCorrect())) {
+			OpenAllDoors();
+		}
 	}
 
 	public void _on_body_entered(Node2D node) {
@@ -58,19 +55,18 @@ public partial class Keypad : Node2D
 		}
 	}
 
-	public void Correct() {
-
-		foreach (Door door in UnlocksDoors) {
-			door.SetOpen();
-		}
-	}
-
 	public void _on_body_exited(Node2D node) {
 
 		if (node.IsInGroup("Player")) {
 			ColorRect colorRect = GetNode<ColorRect>("ColorRect");
 			colorRect.Color = DefaultColour;
 			PlayerNear = false;
+		}
+	}
+
+	public void OpenAllDoors() {
+		foreach (Door door in UnlocksDoors) {
+			door.SetOpen();
 		}
 	}
 }

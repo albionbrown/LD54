@@ -4,20 +4,28 @@ using System;
 public partial class KeypadForm : Node2D
 {
 
+	[Export]
+	private String UnlockCode;
+
 	private bool Correct;
 
 	private bool Showing;
+
+	private TextEdit InputBox;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{	
 		Hide();
 		Showing = false;
+		Correct = false;
+		InputBox = GetNode<TextEdit>("AnswerInput");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		
 	}
 
 	public void SetCorrect(bool correct = true)
@@ -50,4 +58,10 @@ public partial class KeypadForm : Node2D
 			Hide();
 		}
 	}	
+
+	public void _on_check_button_pressed() {
+		if (InputBox.Text == UnlockCode) {
+			Correct = true;
+		}
+	}
 }
