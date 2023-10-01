@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bcsdhwf32fjfj"]
+[gd_scene load_steps=10 format=3 uid="uid://bcsdhwf32fjfj"]
 
 [ext_resource type="PackedScene" uid="uid://cq7olfoq7q73f" path="res://Room.tscn" id="1_4vhe8"]
 [ext_resource type="Script" path="res://Level.cs" id="1_8h056"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ct1eifu3d62fs" path="res://Keypad.tscn" id="3_30xtf"]
 [ext_resource type="PackedScene" uid="uid://b8intm5tu0ucy" path="res://KeypadForm.tscn" id="4_lx2bb"]
 [ext_resource type="PackedScene" uid="uid://dqxatv04x4o63" path="res://Door.tscn" id="5_7e40v"]
+[ext_resource type="PackedScene" uid="uid://bml2dkd1avc5r" path="res://Key.tscn" id="8_stw1h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ea5df"]
 size = Vector2(8, 64)
@@ -70,13 +71,6 @@ rotation = 1.5708
 position = Vector2(448, 64)
 rotation = 1.5708
 
-[node name="Character" parent="." groups=["Player"] instance=ExtResource("2_8dtn7")]
-position = Vector2(16, 96)
-rotation = 0.0
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Character"]
-remote_path = NodePath("../../Camera2D")
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(16, 96)
 
@@ -96,5 +90,16 @@ offset_left = -184.0
 offset_top = -120.0
 text = "Welcome to {name}."
 
+[node name="Character" parent="." groups=["Player"] instance=ExtResource("2_8dtn7")]
+position = Vector2(16, 96)
+rotation = 0.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Character"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="Key" parent="." instance=ExtResource("8_stw1h")]
+position = Vector2(192, 96)
+
 [connection signal="body_exited" from="Room1/Keypad1" to="Room1/Keypad1" method="_on_body_exited"]
 [connection signal="timeout" from="OpenFirstDoorTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="body_exited" from="Key" to="Key" method="_on_body_exited"]

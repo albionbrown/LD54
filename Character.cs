@@ -19,6 +19,8 @@ public partial class Character : CharacterBody2D
 
 	protected Vector2 input;
 
+	private Node2D Carrying;
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

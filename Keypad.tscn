@@ -5,9 +5,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uar3w"]
 size = Vector2(16, 24)
 
-[node name="Keypad" type="Area2D"]
+[node name="Keypad" type="Area2D" node_paths=PackedStringArray("UnlocksDoors")]
 position = Vector2(0, 8)
 script = ExtResource("1_iqotg")
+UnlocksDoors = []
 metadata/_edit_group_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]

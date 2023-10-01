@@ -29,3 +29,6 @@ sprite_frames = SubResource("SpriteFrames_edr1y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_p4sxy")
+
+[node name="CarryCoordinates" type="Node2D" parent="CollisionShape2D"]
+position = Vector2(33, -0.000118256)
